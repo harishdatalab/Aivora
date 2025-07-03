@@ -14,11 +14,11 @@ load_dotenv()
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 model = genai.GenerativeModel("gemini-1.5-flash")
 
-st.set_page_config(page_title="LearnMate - AI Buddy", page_icon="📚")
-st.title("🎓 LearnMate - AI Learning Companion")
+st.set_page_config(page_title="KINA - AI Buddy", page_icon="📘")
+st.title("🎓 KINA - AI Assisstant")
 
 # Sidebar: Enhanced Sidebar with Goals and Tasks
-st.sidebar.title("📌 LearnMate Dashboard")
+st.sidebar.title("📌 KINA Dashboard")
 
 # Learning Goals Section
 st.sidebar.subheader("🎯 Your Learning Goals")
@@ -61,21 +61,21 @@ def safe_translate(text, lang):
 
 # Tabs
 
-TABS = st.tabs(["📘 Learning Path", "💬 Study Twin", "🧪 Quiz Generator", "🎧 Audio Summary", "🌐 Regional Buddy"])
+TABS = st.tabs(["📘 Customised Learning Path", "💬 Micro Learning", "🧪 Quiz Generator", "🎧 Audio Generator", "🌐 Language Convertor"])
 
 # ------------------------ 📘 Learning Path ------------------------# 
 with TABS[0]:
     st.header("📘 Build Your Learning Roadmap")
     
-    lang = st.selectbox("🌐 Language", ["english", "hindi", "tamil", "telugu"])
+    lang = st.selectbox("🌐 Language", ["english", "spanish", "french", "Japanese"])
     knowledge = st.text_area("🧠 Your Current Knowledge")
-    goal = st.text_area("🎯 Learning Goal")
+    goal = st.text_area("Learning Goals")
     style = st.selectbox("🧩 Learning Style", ["Visual", "Reading", "Hands-on", "Mixed"])
 
     if st.button("🚀 Generate Plan"):
         with st.spinner("🧠 Crafting your custom roadmap..."):
             prompt = f"""
-            You are LearnMate, an expert AI tutor.
+            You are KINA, an expert AI tutor.
             The user has the following:
             - Current knowledge: {knowledge}
             - Goal: {goal}
@@ -116,7 +116,7 @@ with TABS[0]:
 # ------------------------ 💬 Study Twin ------------------------
 # ------------------------ 💬 Study Twin ------------------------
 with TABS[1]:
-    st.header("💬 AI Study Twin👯")
+    st.header("💬 Micro learning")
     if "study_step" not in st.session_state:
         st.session_state.study_step = 1
     if "chat_history" not in st.session_state:
@@ -153,7 +153,7 @@ with TABS[1]:
             st.markdown(f"**{role}:** {msg['parts'][0]}")
 # ------------------------ 🧪 Quiz Generator ------------------------
 with TABS[2]:
-    st.header("🧪 Test Yourself!")
+    st.header("🧪 Quiz Generator!")
 
     topic = st.text_input("📘 Enter a topic to quiz yourself:")
     if st.button("🎯 Generate Quiz"):
@@ -202,7 +202,7 @@ with TABS[2]:
         st.download_button("⬇️ Download Full Quiz (.txt)", st.session_state.full_quiz_text, file_name="quiz.txt")
 # ------------------------ 🎧 Audio Summary ------------------------
 with TABS[3]:
-    st.header("🎧 Audio Summary")
+    st.header("🎧 Audio Generator")
     text = st.text_area("Enter content:")
     if st.button("🔊 Generate Audio"):
         tts = gTTS(text)
@@ -216,8 +216,8 @@ with TABS[3]:
 
 # ------------------------ 🌐 Regional Buddy ------------------------
 with TABS[4]:
-    st.header("🌐 Speak in Your Language")
-    lang = st.selectbox("Choose Language", ["hindi", "tamil", "telugu"])
+    st.header("🌐 Language Converter")
+    lang = st.selectbox("Choose Language", ["spanish", "french", "Japanese"])
     msg = st.text_area("Type your message:")
     if st.button("🔁 Translate"):
         try:
