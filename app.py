@@ -14,11 +14,11 @@ load_dotenv()
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 model = genai.GenerativeModel("gemini-1.5-flash")
 
-st.set_page_config(page_title="LearnMate - AI Buddy", page_icon="📚")
-st.title("🎓 LearnMate - AI Learning Companion")
+st.set_page_config(page_title="KINA - AI Buddy", page_icon="📚")
+st.title("🎓 KINA - AI Learning Companion")
 
 # Sidebar: Enhanced Sidebar with Goals and Tasks
-st.sidebar.title("📌 LearnMate Dashboard")
+st.sidebar.title("📌 KINA Dashboard")
 
 # Learning Goals Section
 st.sidebar.subheader("🎯 Your Learning Goals")
@@ -61,21 +61,21 @@ def safe_translate(text, lang):
 
 # Tabs
 
-TABS = st.tabs(["📘 Learning Path", "💬 Study Twin", "🧪 Quiz Generator", "🎧 Audio Summary", "🌐 Regional Buddy"])
+TABS = st.tabs(["📘 ing Path", "💬 Study Twin", "🧪 Quiz Generator", "🎧 Audio Summary", "🌐 Regional Buddy"])
 
-# ------------------------ 📘 Learning Path ------------------------# 
+# ------------------------ 📘 ing Path ------------------------# 
 with TABS[0]:
-    st.header("📘 Build Your Learning Roadmap")
+    st.header("📘 Build Your ing Roadmap")
     
     lang = st.selectbox("🌐 Language", ["english", "hindi", "tamil", "telugu"])
     knowledge = st.text_area("🧠 Your Current Knowledge")
-    goal = st.text_area("🎯 Learning Goal")
-    style = st.selectbox("🧩 Learning Style", ["Visual", "Reading", "Hands-on", "Mixed"])
+    goal = st.text_area("🎯 ing Goal")
+    style = st.selectbox("🧩 ing Style", ["Visual", "Reading", "Hands-on", "Mixed"])
 
     if st.button("🚀 Generate Plan"):
         with st.spinner("🧠 Crafting your custom roadmap..."):
             prompt = f"""
-            You are LearnMate, an expert AI tutor.
+            You are Mate, an expert AI tutor.
             The user has the following:
             - Current knowledge: {knowledge}
             - Goal: {goal}
