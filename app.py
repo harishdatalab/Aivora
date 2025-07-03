@@ -15,7 +15,7 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 st.set_page_config(page_title="KINA - AI Buddy", page_icon="📘")
-st.title("🎓 KINA AIAIAIAIAI - AI Assisstant")
+st.title("🎓 KINA - AI Assisstant")
 
 # Sidebar: Enhanced Sidebar with Goals and Tasks
 st.sidebar.title("📌 KINA Dashboard")
@@ -65,7 +65,7 @@ TABS = st.tabs(["📘 Customised Learning Path", "💬 Micro Learning", "🧪 Qu
 
 # ------------------------ 📘 Learning Path ------------------------# 
 with TABS[0]:
-    st.header("📘 Build Your Learning Roadmap")
+    st.header("📘 Customised Learning Path")
     
     lang = st.selectbox("🌐 Language", ["english", "spanish", "french", "Japanese"])
     knowledge = st.text_area("🧠 Your Current Knowledge")
@@ -113,8 +113,7 @@ with TABS[0]:
 
             st.markdown("---")
             st.success("✅ Video links are now clickable. Save this roadmap and start learning!")
-# ------------------------ 💬 Study Twin ------------------------
-# ------------------------ 💬 Study Twin ------------------------
+# ------------------------ 💬 Study Twin ------------------------ #
 with TABS[1]:
     st.header("💬 Micro learning")
     if "study_step" not in st.session_state:
