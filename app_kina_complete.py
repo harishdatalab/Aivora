@@ -12,11 +12,7 @@ import speech_recognition as sr
 
 # Load environment variables
 load_dotenv()
-api_key = os.getenv("GOOGLE_API_KEY")
-if not api_key:
-    st.error("❌ GOOGLE_API_KEY not found. Please set it in your environment or Streamlit Secrets.")
-    st.stop()
-genai.configure(api_key=api_key)
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 st.set_page_config(page_title="KINA - AI Buddy", page_icon="📘")
