@@ -61,7 +61,7 @@ def safe_translate(text, lang):
 
 # Tabs
 
-TABS = st.tabs(["📘 Customised Learning Path", "💬 Micro Learning", "🧪 Quiz Generator", "🎧 Audio Generator", "🌐 Language Convertor"])
+TABS = st.tabs(["📘 Customised Learning Path", "💬 Micro Learning", "🧪 Quiz Generator", "🎧 Audio Generator", "🌐 Language Convertor", "🧠 AI Content Chunker", "🗣 Scenario Builder with AI Personas"])
 
 # ------------------------ 📘 Learning Path ------------------------# 
 with TABS[0]:
@@ -225,3 +225,90 @@ with TABS[4]:
             st.success(f"Translated ({lang.upper()}): {translated}")
         except Exception as e:
             st.error(f"Error: {e}")
+
+# ------------------------ 🧠 AI Content Chunker ------------------------
+with TABS[5]:
+    st.header("🧠 AI Content Chunker")
+    st.markdown("Split large content into digestible chunks for course design or eLearning development.")
+
+    raw_content = st.text_area("📄 Paste your raw content here (e.g., textbook extract, notes):", height=250)
+
+    chunk_style = st.selectbox(
+        "🧩 Chunking Style",
+        ["By Topic", "By Learning Objective", "By Key Concepts"]
+    )
+
+    if st.button("🪄 Chunk My Content"):
+        with st.spinner("Breaking it down for you..."):
+            prompt = f"""
+            You are KINA, an expert instructional designer.
+            The user has pasted the following raw content:
+            ---
+            {raw_content}
+            ---
+            Please chunk this content into clear, labeled sections based on: {chunk_style}.
+            Each chunk should include:
+            - A short heading (##)
+            - A short summary or key point
+            - (Optional) suggestion of what format this would work well in (e.g., video, quiz, flashcard)
+
+            Format the output in Markdown for readability.
+            """
+
+            try:
+                chunks = model.generate_content(prompt).text
+                st.markdown("### 🧩 Chunked Content")
+                st.markdown(chunks, unsafe_allow_html=True)
+
+                st.download_button(
+                    "⬇️ Download as .txt",
+                    chunks,
+                    file_name="chunked_content.txt",
+                    mime="text/plain"
+                )
+                st.success("✅ Content chunked and ready to use!")
+            except Exception as e:
+                st.error(f"⚠️ Something went wrong: {e}")
+                
+# ------------------------ 🗣 Scenario Builder with AI Personas ------------------------
+with TABS[6]:
+    st.header("🗣 Scenario Builder with AI Personas")
+    st.markdown("Create interactive, realistic learning scenarios by defining a role and situation.")
+
+    scenario_topic = st.text_input("🎯 Topic or Context for the Scenario", placeholder="e.g., Giving constructive feedback to a teammate")
+    persona = st.selectbox("🧍 Persona to Simulate", ["Learner", "Manager", "Subject Matter Expert (SME)", "Peer/Colleague"])
+    tone = st.selectbox("🎭 Tone of Conversation", ["Formal", "Casual", "Supportive", "Challenging"])
+    length = st.selectbox("🕐 Scenario Length", ["Short (1-2 turns)", "Medium (3-4 turns)", "Long (5+ turns)"])
+
+    if st.button("🎬 Generate Scenario"):
+        with st.spinner("Crafting your roleplay..."):
+            prompt = f"""
+            You are KINA, an instructional designer assistant.
+
+            Please generate a realistic, dialogue-based learning scenario based on:
+            - Topic: {scenario_topic}
+            - Persona Role: {persona}
+            - Tone: {tone}
+            - Desired Length: {length}
+
+            Structure the output like a roleplay, alternating between "You" and "{persona}".
+            Highlight learner decisions or challenges clearly.
+            Add markdown formatting for readability (bold names, headers, bullet points if helpful).
+            """
+
+            try:
+                scenario = model.generate_content(prompt).text
+                st.markdown("### 🎭 Generated Learning Scenario")
+                st.markdown(scenario, unsafe_allow_html=True)
+
+                st.download_button(
+                    label="⬇️ Download Scenario as .txt",
+                    data=scenario,
+                    file_name="learning_scenario.txt",
+                    mime="text/plain"
+                )
+                st.success("✅ Scenario generated successfully!")
+
+            except Exception as e:
+                st.error(f"⚠️ Error: {e}")
+
