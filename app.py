@@ -14,7 +14,7 @@ load_dotenv()
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 model = genai.GenerativeModel("gemini-1.5-flash")
 
-st.set_page_config(page_title="KINA - AI Buddy", page_icon="📘")
+st.set_page_config(page_title="KINA AIAIAIAIAI- AI Buddy", page_icon="📘")
 st.title("🎓 KINA - AI Assisstant")
 
 # Sidebar: Enhanced Sidebar with Goals and Tasks
